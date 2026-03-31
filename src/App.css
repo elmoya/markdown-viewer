@@ -1,0 +1,78 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Split layout */
+.layout-split {
+  display: flex;
+}
+
+.pane {
+  flex: 1;
+  overflow: hidden;
+}
+
+.pane-divider {
+  width: 1px;
+  background: var(--border-color);
+  flex-shrink: 0;
+}
+
+/* Tabbed layout */
+.layout-tabbed {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-bar {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  padding: 8px 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+.tab-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Responsive: stack split on small screens */
+@media (max-width: 768px) {
+  .layout-split {
+    flex-direction: column;
+  }
+
+  .pane-divider {
+    width: 100%;
+    height: 1px;
+  }
+}

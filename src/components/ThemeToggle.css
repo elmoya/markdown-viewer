@@ -1,0 +1,29 @@
+.toggle-group {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.toggle-btn {
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  border: none;
+  background: var(--toggle-bg);
+  color: var(--toggle-text);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.toggle-btn:not(:last-child) {
+  border-right: 1px solid var(--border-color);
+}
+
+.toggle-btn.active {
+  background: var(--toggle-active-bg);
+  color: var(--toggle-active-text);
+}
+
+.toggle-btn:hover:not(.active) {
+  background: var(--bg-hover);
+}

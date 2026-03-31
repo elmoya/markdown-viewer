@@ -1,0 +1,17 @@
+.output-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.output-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.output-content {
+  flex: 1;
+  overflow: hidden;
+}
