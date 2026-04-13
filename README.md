@@ -1,65 +1,72 @@
 # Markdown Viewer
 
-A single-purpose web app that converts a markdown string value (containing literal `\n` escape sequences) into rendered HTML or raw markdown output.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](#license)
+[![Live Demo](https://img.shields.io/badge/demo-online-brightgreen.svg)](https://elmoya.github.io/markdown-viewer/)
+[![React](https://img.shields.io/badge/frontend-React%2019-61dafb.svg)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/lang-TypeScript-3178c6.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/bundler-Vite%206-646cff.svg)](https://vitejs.dev/)
+[![Docker](https://img.shields.io/badge/runtime-Docker-2496ed.svg)](https://www.docker.com/)
+[![GitHub Pages](https://img.shields.io/badge/deploy-GitHub%20Pages-222.svg)](https://pages.github.com/)
 
-## Quick Start
+A tiny, zero-setup tool for turning escaped markdown strings — the kind you pull out of API responses or JSON blobs, full of literal `\n` and `\t` sequences — into a clean, readable preview.
 
-```bash
-docker compose up --build -d
-```
+**[Try the live demo →](https://elmoya.github.io/markdown-viewer/)**
 
-Open **http://localhost:5002**
+## Why?
+
+If you've ever copied a markdown field out of a database or a JSON payload and ended up staring at a wall of text peppered with `\n\n` and `\t`, this is for you. Paste the raw string in, get properly rendered markdown out — or the cleaned-up raw text, whichever you need.
+
+It's especially handy when working with **n8n** and other automation platforms, where LLM or API nodes often emit markdown as escaped strings inside JSON. Drop the value in here and you can actually read it the way it was meant to look.
 
 ## Features
 
-- **Escape conversion** — Transforms literal `\n`, `\t`, `\\` sequences into actual characters before rendering
-- **Split / Tabbed layout** — Side-by-side view or full-width tabbed view
-- **Rendered / Raw output** — Toggle between formatted HTML preview and raw markdown text
-- **Theming** — Light, Dark, and System (auto-detect OS preference)
-- **Copy / Paste / Clear** — Clipboard actions for input and output panels
-- **Persistent preferences** — Layout, theme, and output mode saved to localStorage
+- **Escape-sequence aware** — Converts literal `\n`, `\t`, `\\` back into real whitespace before rendering
+- **Live preview** — See the output update as you type, side-by-side or in tabs
+- **Two output modes** — Rendered HTML or cleaned raw markdown
+- **Light / Dark / System theme** — Auto-matches your OS by default
+- **Clipboard-friendly** — One-click copy, paste, and clear on both panels
+- **Remembers your setup** — Layout, theme, and mode persist across sessions
+- **GitHub Flavored Markdown** — Tables, task lists, strikethrough, and more
 
-## Tech Stack
-
-- React 19 + TypeScript
-- Vite 6
-- react-markdown + remark-gfm
-- Docker (Node 20 Alpine)
-
-## Development
+## Run locally
 
 ```bash
-# Start dev server with hot reload
 docker compose up --build -d
-
-# View logs
-docker compose logs -f app
-
-# Stop
-docker compose down
 ```
 
-The dev server runs inside Docker with file polling enabled for hot reload on Windows.
+Then open http://localhost:5002.
 
-## Production Build
+Hot reload is wired up with file polling so editing [src/](src/) reflects instantly, even on Windows.
+
+```bash
+docker compose logs -f app   # tail logs
+docker compose down          # stop
+```
+
+## Deploy your own
+
+Fork the repo, then:
+
+1. Go to **Settings → Pages → Source** and pick **GitHub Actions**
+2. Push to `main`
+
+That's it — your copy goes live at `https://<your-username>.github.io/markdown-viewer/`. The included workflow handles the build and deploy on every push.
+
+> If you rename the repo, update the `base` path in [vite.config.ts](vite.config.ts) to match.
+
+## Production build
 
 ```bash
 docker build --target prod -t markdown-viewer .
 docker run -p 80:80 markdown-viewer
 ```
 
-This builds the app and serves it via Nginx.
+Serves the static bundle via Nginx.
 
-## GitHub Pages Deployment
+## Tech stack
 
-The app auto-deploys to GitHub Pages on every push to `main` via the included GitHub Actions workflow.
+React 19 · TypeScript · Vite 6 · react-markdown · remark-gfm · Docker (Node 20 Alpine)
 
-**Setup:**
+## License
 
-1. Push the repo to GitHub (repo name should match the `base` path in `vite.config.ts`, default: `markdown-viewer`)
-2. Go to repo **Settings** → **Pages** → **Source** → select **GitHub Actions**
-3. Push to `main` — the workflow builds and deploys automatically
-
-The app will be live at `https://<your-username>.github.io/markdown-viewer/`
-
-The Vite config uses `--mode ghpages` in the workflow to set the correct base path for GitHub Pages while keeping `/` for local development.
+[MIT](LICENSE) — free to use, fork, and adapt. Built as a portfolio / hobby project.
