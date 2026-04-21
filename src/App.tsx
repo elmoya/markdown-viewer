@@ -9,7 +9,7 @@ import type { Layout, OutputMode, ActiveTab } from './types'
 import './App.css'
 
 function App() {
-  const [inputText, setInputText] = useState('')
+  const [inputText, setInputText] = useLocalStorage<string>('md-viewer-input', '')
   const [theme, setTheme] = useTheme()
   const [layout, setLayout] = useLocalStorage<Layout>('md-viewer-layout', 'split')
   const [outputMode, setOutputMode] = useLocalStorage<OutputMode>('md-viewer-output', 'rendered')
